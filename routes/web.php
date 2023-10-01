@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/language/{language}', function($language) {
+    Session::put('locale', $language);
+    return redirect()->back();
+})->name('language');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/posts', function () {
+    return view('posts.index');
+})->name('posts.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
